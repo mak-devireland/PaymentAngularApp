@@ -1,25 +1,28 @@
-<form>
+<form novalidate #form="ngForm" (submit)="onSubmit(form)">
   <input type="hidden" name="paymentId" [value]="service.formData.paymentId" />
   <div class="form-group">
     <label>CARD HOLDER</label>
     <input type="text" class="form-control form-control-lg" placeholder="Type your full name" name="cardHolder"
-      #cardNumber="ngModel" [(ngModel)]="service.formData.cardHolder">
+      #cardNumber="ngModel" [(ngModel)]="service.formData.cardHolder" required />
   </div>
   <div class="form-group">
     <label>CARD NUMBER</label>
     <input type="text" class="form-control form-control-lg" placeholder="Type your card 16 numbers" name="cardNumber"
-      #cardNumber="ngModel" [(ngModel)]="service.formData.cardNumber">
+      #cardNumber="ngModel" [(ngModel)]="service.formData.cardNumber" required maxlength="16" minlength="16">
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>EXPIRING DATE</label>
       <input type="text" class="form-control form-control-lg" placeholder="MM/YY" name="expiringDate"
-        #expiringDate="ngModel" [(ngModel)]="service.formData.expiringDate">
+        #expiringDate="ngModel" [(ngModel)]="service.formData.expiringDate" required maxlength="5" minlength="5">
     </div>
     <div class="form-group col-md-6">
       <label>SECURITY CODE</label>
-      <input type="password" class="form-control form-control-lg" placeholder="Security Code"
-        name="securityCode" #securityCode="ngModel" [(ngModel)]="service.formData.securityCode">
+      <input type="password" class="form-control form-control-lg" placeholder="Security Code" name="securityCode"
+        #securityCode="ngModel" [(ngModel)]="service.formData.securityCode" required maxlength="3" minlength="3">
     </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
   </div>
 </form>
